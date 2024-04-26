@@ -14,7 +14,9 @@
 
 
 #### 1. Ansible плэйбук и лог его выполнения:
-**См. директорию ansible*
+**См. директорию ansible:*
+https://github.com/yakimov778/test-assignment/tree/main/ansible
+
 ```bash
 lsattr@linux:~/test/ansible$ ansible-playbook -i inventory.yaml install_jenkins.yml 
 
@@ -69,7 +71,7 @@ PLAY RECAP *********************************************************************
 
 #### 3. Файл конфигурации sshd:
 
-**См. директорию sshd_config_file*
+**См. директорию sshd_config_file:* https://github.com/yakimov778/test-assignment/tree/main/sshd_config_file
 
 -------------------------------------------------------------------
 
