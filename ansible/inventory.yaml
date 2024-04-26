@@ -1,0 +1,8 @@
+vm1:
+  hosts:
+    192.168.1.203:
+      ansible_user: vagrant
+      ansible_ssh_private_key_file: /home/lsattr/.ssh/id_rsa
+vm2:
+  hosts:
+    192.168.1.204:

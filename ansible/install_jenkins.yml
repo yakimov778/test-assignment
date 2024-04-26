@@ -1,0 +1,54 @@
+---
+- name: Install and configure Jenkins
+  hosts: vm1
+  become: true
+  tasks:
+    - name: Add Jenkins Repository
+      get_url:
+        url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+        dest: /etc/yum.repos.d/jenkins.repo
+
+    - name: Import Jenkins GPG Key
+      shell: rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+    - name: Upgrade Packages
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Install required dependencies for Jenkins package
+      yum:
+        name:
+          - fontconfig
+          - java-17-openjdk
+        state: present
+
+    - name: Install Jenkins
+      yum:
+        name: jenkins
+        state: present
+
+    - name: Enable and start Jenkins 
+      systemd:
+        name: jenkins
+        enabled: yes
+        state: started
+
+    - name: permit traffic in default zone for https service
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+
+    - name: permit traffic in default zone on port 8080/tcp
+      firewalld:
+        port: 8080/tcp
+        permanent: yes
+        state: enabled
+
+    - name: Reload firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+
+
